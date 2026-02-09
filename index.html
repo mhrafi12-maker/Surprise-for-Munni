@@ -2,8 +2,8 @@
 <html lang="bn">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Propose Day - Munni & Rafi</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chocolate Day Special - Munni</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;500;700&family=Dancing+Script:wght@700&family=Parisienne&display=swap');
 
@@ -15,7 +15,7 @@
         }
 
         body {
-            background: #050505;
+            background: #1a0f0a; /* Dark Chocolate Background */
             height: 100vh;
             display: flex;
             justify-content: center;
@@ -24,11 +24,27 @@
             overflow: hidden;
             position: relative;
             user-select: none;
-            padding: 20px;
         }
 
-        /* Falling Elements */
-        .falling {
+        /* Sparkle effect with Golden color */
+        .sparkle {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #ffd700;
+            border-radius: 50%;
+            pointer-events: none;
+            box-shadow: 0 0 10px #ffd700, 0 0 20px #ffd700;
+            animation: sparkle-fade 1s linear forwards;
+        }
+
+        @keyframes sparkle-fade {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(3); opacity: 0; }
+        }
+
+        /* Falling Items */
+        .petal {
             position: absolute;
             top: -10%;
             pointer-events: none;
@@ -39,29 +55,30 @@
         /* iOS Glassmorphism Card */
         .glass-card {
             background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px);
-            border: 1px solid rgba(255, 45, 85, 0.3);
-            border-radius: 35px;
-            padding: 40px 20px;
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid rgba(210, 105, 30, 0.2);
+            border-radius: 40px;
+            padding: 40px 25px;
             text-align: center;
-            width: 100%;
-            max-width: 400px;
-            box-shadow: 0 40px 100px rgba(0, 0, 0, 1);
+            width: 88%;
+            max-width: 380px;
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.9);
             z-index: 10;
+            position: relative;
         }
 
-        .propose-icon {
-            font-size: 50px;
-            filter: drop-shadow(0 0 15px #ff2d55);
-            margin-bottom: 10px;
-            animation: pulse 2s infinite;
+        .choc-icon {
+            font-size: 55px;
+            filter: drop-shadow(0 0 20px #d2691e);
+            margin-bottom: 5px;
+            cursor: pointer;
         }
 
         h1 {
-            color: #ff2d55;
+            color: #d2691e;
             font-family: 'Dancing Script', cursive;
-            font-size: 30px;
+            font-size: 32px;
             margin-bottom: 5px;
         }
 
@@ -70,177 +87,190 @@
             font-size: 28px;
             font-weight: bold;
             display: block;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
-        /* Glowing Text Reveal Effect */
-        #text-container {
-            min-height: 100px;
-            margin-bottom: 30px;
-        }
-
-        .word {
-            display: inline-block;
-            opacity: 0;
-            filter: blur(10px);
-            transform: translateY(10px);
-            color: #d0d0d0;
+        #typing-text {
+            color: #e0d0c0;
             font-size: 17px;
-            margin: 0 3px;
-            transition: all 0.8s ease;
+            line-height: 1.7;
+            min-height: 100px;
+            margin-bottom: 25px;
         }
 
-        .word.visible {
-            opacity: 1;
-            filter: blur(0);
-            transform: translateY(0);
+        /* Floating Bubbles */
+        .bubble {
+            position: absolute;
+            background: rgba(210, 105, 30, 0.2);
             color: #fff;
-            text-shadow: 0 0 8px rgba(255, 45, 85, 0.5);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            pointer-events: none;
+            animation: float-bubble 6s infinite ease-in-out;
+            z-index: 5;
         }
 
-        .btn-love {
-            background: linear-gradient(45deg, #ff2d55, #8e001c);
-            color: white;
-            border: none;
-            padding: 15px 40px;
-            border-radius: 50px;
-            font-size: 18px;
-            font-weight: bold;
-            cursor: pointer;
-            box-shadow: 0 10px 25px rgba(255, 45, 85, 0.4);
-            transition: 0.3s;
+        @keyframes float-bubble {
+            0% { transform: translateY(0) translateX(0); opacity: 0; }
+            50% { opacity: 0.8; }
+            100% { transform: translateY(-100vh) translateX(50px); opacity: 0; }
         }
 
-        .btn-love:active { transform: scale(0.95); }
-
-        .signature-text {
-            margin-top: 35px;
-            font-family: 'Parisienne', cursive;
-            font-size: 26px;
-            background: linear-gradient(to right, #ff758f, #ff2d55);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            display: block;
-            animation: glow-sign 2s infinite alternate;
-        }
-
-        /* Neon Propose Popup */
-        #propose-popup {
+        /* Big Sweet Popup */
+        #love-popup {
             position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%) scale(0);
-            background: rgba(10, 10, 10, 0.98);
-            border: 1px solid #ff2d55;
-            padding: 35px 20px;
+            background: rgba(26, 15, 10, 0.95);
+            border: 2px solid #d2691e;
+            backdrop-filter: blur(15px);
+            color: #ffd700;
+            padding: 40px 20px;
             border-radius: 30px;
+            font-size: 32px;
+            font-weight: bold;
             z-index: 100;
             width: 85%;
-            max-width: 320px;
             text-align: center;
-            box-shadow: 0 0 80px rgba(255, 45, 85, 0.6);
+            box-shadow: 0 0 50px rgba(210, 105, 30, 0.5);
             transition: 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        #propose-popup.active { transform: translate(-50%, -50%) scale(1); }
+        #love-popup.active {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .btn-magic {
+            background: linear-gradient(45deg, #8b4513, #d2691e);
+            color: white;
+            border: none;
+            padding: 16px 45px;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(139, 69, 19, 0.5);
+        }
+
+        .signature-container {
+            margin-top: 35px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .signature-text {
+            font-family: 'Parisienne', cursive;
+            font-size: 26px;
+            background: linear-gradient(to right, #ffd700, #d2691e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: bold;
+            display: inline-block;
+            animation: glow 2.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { filter: drop-shadow(0 0 2px #d2691e); }
+            to { filter: drop-shadow(0 0 12px #ffd700); }
+        }
 
         @keyframes fall {
             0% { transform: translateY(-10vh) rotate(0deg); opacity: 0; }
+            20% { opacity: 1; }
             100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.15); }
-        }
-
-        @keyframes glow-sign {
-            from { filter: drop-shadow(0 0 2px #ff2d55); }
-            to { filter: drop-shadow(0 0 8px #ff758f); }
         }
     </style>
 </head>
 <body onmousemove="drawSparkle(event)" ontouchmove="drawSparkleTouch(event)">
 
+    <script>
+        function createPetal() {
+            const petal = document.createElement('div');
+            petal.classList.add('petal');
+            // Falling chocolate and hearts
+            const items = ['🍫', '🍩', '🍪', '❤️', '✨'];
+            petal.innerHTML = items[Math.floor(Math.random() * items.length)];
+            petal.style.left = Math.random() * 100 + 'vw';
+            petal.style.animationDuration = (Math.random() * 3 + 4) + 's';
+            petal.style.fontSize = (Math.random() * 15 + 15) + 'px';
+            document.body.appendChild(petal);
+            setTimeout(() => { petal.remove(); }, 6000);
+        }
+        setInterval(createPetal, 300);
+
+        function createBubble() {
+            const bubbles = ["Sweet", "Chocolate", "Munni", "Tasty", "Love"];
+            const b = document.createElement('div');
+            b.classList.add('bubble');
+            b.innerHTML = bubbles[Math.floor(Math.random() * bubbles.length)];
+            b.style.left = Math.random() * 100 + 'vw';
+            b.style.bottom = "-50px";
+            b.style.animationDuration = (Math.random() * 4 + 6) + 's';
+            document.body.appendChild(b);
+            setTimeout(() => { b.remove(); }, 8000);
+        }
+        setInterval(createBubble, 2000);
+
+        function drawSparkle(e) { makeSparkle(e.pageX, e.pageY); }
+        function drawSparkleTouch(e) { makeSparkle(e.touches[0].pageX, e.touches[0].pageY); }
+        
+        function makeSparkle(x, y) {
+            const s = document.createElement('div');
+            s.className = 'sparkle';
+            s.style.left = x + 'px';
+            s.style.top = y + 'px';
+            document.body.appendChild(s);
+            setTimeout(() => s.remove(), 1000);
+        }
+    </script>
+
     <div class="glass-card">
-        <div class="propose-icon">💍</div>
-        <h1>Propose Day</h1>
+        <div class="choc-icon" onclick="alert('তুমি চকোলেটের চেয়েও মিষ্টি!')">🍫</div>
+        <h1>Happy Chocolate Day</h1>
         <span class="recipient">প্রিয় মুন্নি</span>
         
-        <div id="text-container"></div>
+        <div id="typing-text"></div>
         
-        <button class="btn-love" onclick="propose()">এখানে চাপ দাও</button>
+        <button class="btn-magic" onclick="showLove()">মিষ্টি একটা সারপ্রাইজ</button>
         
-        <div class="signature-text">-- তোমার ভালোবাসার রাফি ❤️</div>
+        <div class="signature-container">
+            <div class="signature-text">-- তোমার ভালোবাসার রাফি ❤️</div>
+        </div>
     </div>
 
-    <div id="propose-popup">
-        <div style="font-size: 22px; color: #ff2d55; margin-bottom: 12px; font-weight: bold;">
-            Will you be mine forever, Munni? 💍
+    <div id="love-popup">
+        Stay Sweet Always! 🍫
+        <div style="font-size: 16px; font-weight: normal; margin-top: 15px; color: #fff;">
+            পৃথিবীর সব চকোলেট একদিকে,<br>আর তোমার মিষ্টি হাসি একদিকে!
         </div>
-        <p style="color: #eee; font-size: 15px; line-height: 1.5;">
-            Dear Munni, আমার সবটুকু ভালোবাসা দিয়ে সারাজীবন তোমাকে আগলে রাখতে চাই। ❤️
-        </p>
     </div>
 
     <script>
-        // Falling Items
-        function createFalling() {
-            const el = document.createElement('div');
-            el.className = 'falling';
-            el.innerHTML = Math.random() > 0.5 ? '💌' : '💖';
-            el.style.left = Math.random() * 95 + 'vw';
-            el.style.animationDuration = (Math.random() * 2 + 3) + 's';
-            document.body.appendChild(el);
-            setTimeout(() => el.remove(), 5000);
+        const text = "Munnu বউ, আজকের দিনটা চকোলেটের মতোই মিষ্টি হোক তোমার জন্য। তুমি আমার জীবনের সেই মিষ্টতা, যা ছাড়া সবকিছুই অসম্পূর্ণ। আজকের এই চকোলেট ডে-তে অনেক অনেক ভালোবাসা ও শুভেচ্ছা রইলো।আমার সাথে থাকলে প্রতিদিন চকলেট পাবে।থাকবে তো আমার সাথে?";
+        let index = 0;
+
+        function playTyping() {
+            if (index < text.length) {
+                document.getElementById("typing-text").innerHTML += text.charAt(index);
+                index++;
+                setTimeout(playTyping, 65);
+            }
         }
-        setInterval(createFalling, 400);
 
-        // Word Reveal Effect
-        const message = "Dear Munni, হাজার মানুষের ভিড়ে আমার চোখ শুধু তোমাকেই খোঁজে। আজকের এই বিশেষ দিনে সরাসরি বলতে চাই... আমার অগোছালো জীবনটাকে কি তোমার ভালোবাসা দিয়ে সাজিয়ে দেবে?";
-        const container = document.getElementById('text-container');
-        
-        message.split(' ').forEach((word, index) => {
-            const span = document.createElement('span');
-            span.className = 'word';
-            span.innerHTML = word + '&nbsp;';
-            container.appendChild(span);
-            
-            setTimeout(() => {
-                span.classList.add('visible');
-            }, index * 250); 
-        });
-
-        // Touch Trail
-        function makeSparkle(x, y) {
-            const s = document.createElement('div');
-            s.style.position = 'absolute';
-            s.style.width = '8px'; s.style.height = '8px';
-            s.style.background = '#ff2d55';
-            s.style.borderRadius = '50%';
-            s.style.left = x + 'px'; s.style.top = y + 'px';
-            s.style.pointerEvents = 'none';
-            s.style.boxShadow = '0 0 10px #ff2d55';
-            document.body.appendChild(s);
-            s.animate([{transform: 'scale(1)', opacity: 1}, {transform: 'scale(2)', opacity: 0}], 800);
-            setTimeout(() => s.remove(), 800);
-        }
-        function drawSparkle(e) { makeSparkle(e.pageX, e.pageY); }
-        function drawSparkleTouch(e) { makeSparkle(e.touches[0].pageX, e.touches[0].pageY); }
-
-        // Propose Action with 10s Timer
-        function propose() {
-            const popup = document.getElementById('propose-popup');
+        function showLove() {
+            const popup = document.getElementById('love-popup');
             popup.classList.add('active');
             
-            // Explosion of hearts
-            for(let i=0; i<40; i++) setTimeout(createFalling, i * 50);
-
-            // Hide automatically after 10 seconds (10000 milliseconds)
-            setTimeout(() => {
-                popup.classList.remove('active');
-            }, 10000); 
+            // Explosion of chocolates and hearts
+            for(let i=0; i<50; i++) {
+                setTimeout(createPetal, i * 40);
+            }
+            setTimeout(() => { popup.classList.remove('active'); }, 5000);
         }
+
+        window.onload = playTyping;
     </script>
 </body>
-</html>
+    </html>
