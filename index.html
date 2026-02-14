@@ -3,239 +3,174 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kiss Day Special - Munni</title>
+    <title>Valentine's & 1 Month Anniversary</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;500;700&family=Dancing+Script:wght@700&family=Parisienne&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@500;700&family=Dancing+Script:wght@700&family=Parisienne&family=Charmonman:wght@700&display=swap');
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
         body {
-            background: #000;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-family: 'Hind Siliguri', sans-serif;
-            overflow: hidden;
-            position: relative;
-            user-select: none;
+            background: #000; height: 100vh; display: flex; justify-content: center; align-items: center;
+            font-family: 'Hind Siliguri', sans-serif; overflow: hidden; position: relative;
         }
 
-        /* Background Image with Effects */
         .bg-image {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: url('https://dl.dropbox.com/scl/fi/vzdzj3nlppyhhae9pzin0/IMG_20260127_015633.jpg?rlkey=xtb400kan01xj65afjfdywr73&st=btzeaif3&dl=1');
-            background-size: cover;
-            background-position: center;
-            filter: brightness(0.3) blur(3px);
-            z-index: -1;
-            transform: scale(1.1);
-            animation: bg-zoom 10s infinite alternate ease-in-out;
+            background-size: cover; background-position: center; filter: brightness(0.3) blur(2px); z-index: -1;
+            animation: zoom 15s infinite alternate;
+        }
+        @keyframes zoom { from { transform: scale(1); } to { transform: scale(1.15); } }
+
+        .anniversary-badge {
+            position: absolute; top: 15px; background: linear-gradient(45deg, #ff4d6d, #ff8e72);
+            color: white; padding: 6px 15px; border-radius: 20px; font-size: 12px; font-weight: bold;
+            box-shadow: 0 5px 15px rgba(255, 77, 109, 0.4); z-index: 20;
         }
 
-        @keyframes bg-zoom {
-            from { transform: scale(1.1); }
-            to { transform: scale(1.25); }
-        }
-
-        /* Profile Image with Glowing Circles */
-        .profile-container {
-            position: relative;
-            width: 150px;
-            height: 150px;
-            margin: 0 auto 25px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        .glass-card {
+            background: rgba(15, 0, 5, 0.65); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 35px; padding: 20px 15px; text-align: center; width: 92%; max-width: 380px; z-index: 10;
         }
 
         .profile-img {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid #ff1493;
-            z-index: 5;
+            width: 90px; height: 90px; border-radius: 50%; border: 3px solid #ff4d6d;
+            margin-bottom: 10px; box-shadow: 0 0 20px rgba(255, 77, 109, 0.3);
         }
 
-        /* Animated Circles */
-        .circle {
-            position: absolute;
-            border: 2px solid transparent;
-            border-top-color: #ff1493;
-            border-bottom-color: #ff4d94;
-            border-radius: 50%;
-            animation: rotate 2s linear infinite;
+        .countdown-box {
+            background: rgba(255, 77, 109, 0.15); border-radius: 12px; padding: 8px; margin: 8px 0;
+            border: 1px solid rgba(255, 77, 109, 0.3);
         }
+        .days-count { font-size: 16px; color: #fff; font-weight: bold; text-shadow: 0 0 10px #ff4d6d; }
 
-        .circle-1 { width: 140px; height: 140px; animation-duration: 2s; }
-        .circle-2 { width: 155px; height: 155px; animation-duration: 3s; animation-direction: reverse; border-left-color: #ff1493; }
+        h1 { color: #ff4d6d; font-family: 'Dancing Script', cursive; font-size: 24px; }
+        
+        #typing-text { color: #fff; font-size: 13.5px; line-height: 1.5; min-height: 70px; margin: 8px 0; }
 
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
+        /* Couple Goals Section */
+        .goals-box {
+            margin-top: 10px; padding: 10px; background: rgba(255, 215, 0, 0.1);
+            border-radius: 15px; border-left: 3px solid #ffd700; text-align: left;
         }
-
-        /* Glassmorphism Card */
-        .glass-card {
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 40px;
-            padding: 35px 20px;
-            text-align: center;
-            width: 88%;
-            max-width: 380px;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6);
-            z-index: 10;
-        }
-
-        h1 {
-            color: #ff1493;
-            font-family: 'Dancing Script', cursive;
-            font-size: 30px;
-            margin-bottom: 5px;
-        }
-
-        .recipient {
-            color: #fff;
-            font-size: 26px;
-            font-weight: bold;
-            display: block;
-            margin-bottom: 10px;
-        }
-
-        #typing-text {
-            color: #efefef;
-            font-size: 15px;
-            line-height: 1.6;
-            min-height: 90px;
-            margin-bottom: 20px;
-        }
+        .goals-title { font-size: 12px; color: #ffd700; font-weight: bold; margin-bottom: 3px; display: flex; align-items: center; gap: 5px;}
+        .goals-text { color: #eee; font-size: 12px; font-style: italic; }
 
         .btn-magic {
-            background: linear-gradient(45deg, #ff1493, #ff4d94);
-            color: white;
-            border: none;
-            padding: 14px 40px;
-            border-radius: 50px;
-            font-size: 17px;
-            font-weight: bold;
-            cursor: pointer;
-            box-shadow: 0 10px 20px rgba(255, 20, 147, 0.4);
+            background: linear-gradient(45deg, #ff4d6d, #c9184a); color: white; border: none;
+            padding: 10px 25px; border-radius: 50px; font-weight: bold; cursor: pointer;
+            box-shadow: 0 5px 15px rgba(201, 24, 74, 0.4); margin: 12px 0;
         }
 
-        /* Floating elements */
-        .petal {
-            position: absolute;
-            top: -10%;
-            pointer-events: none;
-            animation: fall linear infinite;
-            z-index: 20;
+        .signature {
+            font-family: 'Charmonman', cursive; font-size: 22px; font-weight: 900; color: #fff;
+            text-shadow: 0 0 10px #ff4d6d; animation: glow 2s infinite ease-in-out; text-decoration: none;
+            display: inline-block;
         }
+        @keyframes glow { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
 
-        @keyframes fall {
-            0% { transform: translateY(-10vh) rotate(0deg); opacity: 0; }
-            20% { opacity: 1; }
-            100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+        .secret-heart {
+            position: absolute; bottom: 20px; left: 20px; font-size: 22px; cursor: pointer;
+            z-index: 50; animation: pulse 1.5s infinite;
         }
+        @keyframes pulse { 0% { transform: scale(1); opacity: 0.6; } 50% { transform: scale(1.3); opacity: 1; } 100% { transform: scale(1); opacity: 0.6; } }
 
-        #love-popup {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(0);
-            background: rgba(10, 10, 10, 0.95);
-            border: 2px solid #ff1493;
-            color: #ff1493;
-            padding: 30px;
-            border-radius: 30px;
-            z-index: 100;
-            width: 80%;
-            text-align: center;
-            transition: 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        .heart { position: absolute; top: -10%; animation: fall linear infinite; z-index: 5; }
+        @keyframes fall { 0% { transform: translateY(-10vh) rotate(0deg); opacity: 0; } 20% { opacity: 1; } 100% { transform: translateY(110vh) rotate(360deg); opacity: 0; } }
+
+        .overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9);
+            display: none; justify-content: center; align-items: center; z-index: 200;
         }
-
-        #love-popup.active { transform: translate(-50%, -50%) scale(1); }
+        .popup-box { background: #1a0005; border: 2px solid #ff4d6d; padding: 25px; border-radius: 25px; text-align: center; width: 85%; color: white; }
+        .close-btn { margin-top: 15px; background: #ff4d6d; border: none; padding: 8px 20px; border-radius: 20px; color: white; font-weight: bold; cursor: pointer;}
     </style>
 </head>
-<body>
+<body onclick="createTouchHeart(event)">
 
     <div class="bg-image"></div>
+    <div class="anniversary-badge">Since 14 Jan 2026 ❤️</div>
+
+    <div class="secret-heart" onclick="showSecret()">💝</div>
 
     <div class="glass-card">
-        <div class="profile-container">
-            <div class="circle circle-1"></div>
-            <div class="circle circle-2"></div>
-            <img class="profile-img" src="https://dl.dropbox.com/scl/fi/6fhstrs98al1jnkyvqg53/IMG_20260213_221832.jpg?rlkey=zfd54i959tqou8ruzc4jir1zv&st=qbp024wr&dl=1" alt="Munni Profile">
+        <img class="profile-img" src="https://dl.dropbox.com/scl/fi/6fhstrs98al1jnkyvqg53/IMG_20260213_221832.jpg?rlkey=zfd54i959tqou8ruzc4jir1zv&st=qbp024wr&dl=1">
+        
+        <div class="countdown-box">
+            <div id="day-counter" class="days-count">Calculating...</div>
         </div>
 
-        <h1>Happy Kiss Day</h1>
-        <span class="recipient">প্রিয় মুন্নি</span>
-        
+        <h1>Happy Valentine's Day</h1>
         <div id="typing-text"></div>
         
-        <button class="btn-magic" onclick="showLove()">জাদুর ছোঁয়া দাও</button>
+        <button class="btn-magic" onclick="showLove()">ভালোবাসা দেখো</button>
+
+        <div class="goals-box">
+            <div class="goals-title">🏹 আমাদের লক্ষ্য (Couple Goals)</div>
+            <div class="goals-text">"ইনশাআল্লাহ্, আগামী বছরের এই দিনটি আমরা একসাথে কোনো এক গোধূলি সন্ধ্যায় হাত ধরে কাটাবো।রাফি তোমাকে অনেক ভালোবাসে,ওরে কষ্ট দিও না"</div>
+        </div>
         
-        <div style="margin-top: 20px; font-family: 'Parisienne', cursive; font-size: 24px; color: #ff758f;">
-            -- তোমার রাফি ❤️
+        <br>
+        <a href="https://www.facebook.com/mdmehedi.hasanrafi.9231" target="_blank" class="signature">তোমার রাফি ❤️</a>
+    </div>
+
+    <div id="overlay-normal" class="overlay">
+        <div class="popup-box">
+            <span style="font-size: 40px;">🎂🌹</span>
+            <h3>Happy 1 Month!</h3>
+            <p>১৪ জানুয়ারি থেকে শুরু হওয়া আমাদের এই গল্পটা যেন আজীবন এভাবেই চলতে থাকে। ভালোবাসি মুন্নু!</p>
+            <button class="close-btn" onclick="closePopup('overlay-normal')">LOVE YOU</button>
         </div>
     </div>
 
-    <div id="love-popup">
-        <span style="font-size: 40px;">💋</span><br>
-        Lots of Kisses!
-        <div style="font-size: 16px; font-weight: normal; margin-top: 15px; color: #fff;">
-            মুন্নি, আজকের এই ছবিটার মতোই তুমি আমার জীবনের আলো। <br> অনেক অনেক ভালোবাসা!
+    <div id="overlay-secret" class="overlay">
+        <div class="popup-box" style="border-color: #ffd700;">
+            <span style="font-size: 40px;">💌</span>
+            <h3 style="color: #ffd700;">গোপন চিরকুট</h3>
+            <p>"মুন্নু, তুমি কি জানো? তোমার ওই মিষ্টি হাসিখানা আমার অন্ধকার জগতের আলো। এভাবেই হাজার বছর তোমার হাত ধরে থাকবো।"</p>
+            <button class="close-btn" style="background: #ffd700; color: #000;" onclick="closePopup('overlay-secret')">বন্ধ করো</button>
         </div>
     </div>
 
     <script>
-        // Typing animation logic
-        const text = "আমার Munnu, তোমার এই মিষ্টি মুখটা আমার সারাদিনের ক্লান্তি দূর করে দেয়। আজকের এই বিশেষ Kiss Day-তে শুধু তোমাকে বলতে চাই—তুমি আমার পৃথিবীর সবচেয়ে প্রিয় মানুষ। পাঠালাম আমার হৃদয়ের সবটুকু ভালোবাসা আর অনেকগুলো কিস। আমার সাথে থেকে যাও মুন্নু! 💋";
-        let index = 0;
+        function updateCounter() {
+            const startDate = new Date("January 14, 2026 16:00:00").getTime();
+            setInterval(function() {
+                const now = new Date().getTime();
+                const diff = now - startDate;
+                const d = Math.floor(diff / (1000*60*60*24));
+                const h = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
+                const m = Math.floor((diff % (1000*60*60)) / (1000*60));
+                document.getElementById("day-counter").innerHTML = d + " দিন, " + h + " ঘণ্টা, " + m + " মিনিট";
+            }, 1000);
+        }
+        updateCounter();
 
-        function playTyping() {
-            if (index < text.length) {
-                document.getElementById("typing-text").innerHTML += text.charAt(index);
-                index++;
-                setTimeout(playTyping, 60);
-            }
+        const text = "জান মুন্নু, আজকের দিনটা ডাবল স্পেশাল! একদিকে ভালোবাসা দিবস, আর অন্যদিকে আজ আমাদের পথচলার ১ মাস পূর্ণ হলো। ১৪ই জানুয়ারি বিকাল ৪টার সেই প্রথম পরিচয়ের মুহূর্ত থেকে আজ পর্যন্ত তুমি আমার পৃথিবীটা বদলে দিয়েছো। ❤️";
+        let i = 0;
+        function typing() { if (i < text.length) { document.getElementById("typing-text").innerHTML += text.charAt(i); i++; setTimeout(typing, 30); } }
+
+        function createHeart() {
+            const h = document.createElement('div'); h.classList.add('heart');
+            h.innerHTML = ['❤️', '💖', '🌹', '💕'][Math.floor(Math.random()*4)];
+            h.style.left = Math.random() * 100 + 'vw'; h.style.animationDuration = (Math.random()*2+3)+'s';
+            document.body.appendChild(h); setTimeout(() => h.remove(), 5000);
+        }
+        setInterval(createHeart, 400);
+
+        function createTouchHeart(e) {
+            if(e.target.tagName === 'BUTTON' || e.target.tagName === 'A') return;
+            const th = document.createElement('div'); th.innerHTML = '❤️';
+            th.style.position = 'fixed'; th.style.left = e.clientX + 'px'; th.style.top = e.clientY + 'px';
+            th.style.pointerEvents = 'none'; th.style.animation = 'fall 1s forwards'; document.body.appendChild(th);
+            setTimeout(() => th.remove(), 1000);
         }
 
-        function createPetal() {
-            const petal = document.createElement('div');
-            petal.classList.add('petal');
-            const icons = ['💋', '😘', '❤️', '💕'];
-            petal.innerHTML = icons[Math.floor(Math.random() * icons.length)];
-            petal.style.left = Math.random() * 100 + 'vw';
-            petal.style.animationDuration = (Math.random() * 3 + 4) + 's';
-            petal.style.fontSize = (Math.random() * 15 + 20) + 'px';
-            document.body.appendChild(petal);
-            setTimeout(() => { petal.remove(); }, 6000);
-        }
-        setInterval(createPetal, 300);
+        function showLove() { if (navigator.vibrate) navigator.vibrate(100); document.getElementById('overlay-normal').style.display = 'flex'; }
+        function showSecret() { if (navigator.vibrate) navigator.vibrate([50,50,50]); document.getElementById('overlay-secret').style.display = 'flex'; }
+        function closePopup(id) { document.getElementById(id).style.display = 'none'; }
 
-        function showLove() {
-            const popup = document.getElementById('love-popup');
-            popup.classList.add('active');
-            for(let i=0; i<50; i++) {
-                setTimeout(createPetal, i * 40);
-            }
-            setTimeout(() => { popup.classList.remove('active'); }, 6000);
-        }
-
-        window.onload = playTyping;
+        window.onload = typing;
     </script>
 </body>
 </html>
