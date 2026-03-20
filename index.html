@@ -10,10 +10,11 @@
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
         body {
-            background: #000; height: 100vh; display: flex; justify-content: center; align-items: center;
-            font-family: 'Hind Siliguri', sans-serif; overflow: hidden; position: relative;
+            background: #000; min-height: 100vh; display: flex; justify-content: center; align-items: center;
+            font-family: 'Hind Siliguri', sans-serif; overflow-x: hidden; position: relative; color: white;
         }
 
+        /* Background Image - Main Landing */
         .bg-image {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: url('https://dl.dropbox.com/scl/fi/vzdzj3nlppyhhae9pzin0/IMG_20260127_015633.jpg?rlkey=xtb400kan01xj65afjfdywr73&st=btzeaif3&dl=1');
@@ -21,6 +22,11 @@
             animation: zoom 15s infinite alternate;
         }
         @keyframes zoom { from { transform: scale(1); } to { transform: scale(1.15); } }
+
+        /* Main Landing Page */
+        #main-page {
+            display: flex; flex-direction: column; align-items: center; width: 100%; z-index: 10;
+        }
 
         .anniversary-badge {
             position: absolute; top: 15px; background: linear-gradient(45deg, #ff4d6d, #ff8e72);
@@ -45,10 +51,8 @@
         .days-count { font-size: 16px; color: #fff; font-weight: bold; text-shadow: 0 0 10px #ff4d6d; }
 
         h1 { color: #ff4d6d; font-family: 'Dancing Script', cursive; font-size: 24px; }
-        
         #typing-text { color: #fff; font-size: 13.5px; line-height: 1.5; min-height: 70px; margin: 8px 0; }
 
-        /* Couple Goals Section */
         .goals-box {
             margin-top: 10px; padding: 10px; background: rgba(255, 215, 0, 0.1);
             border-radius: 15px; border-left: 3px solid #ffd700; text-align: left;
@@ -65,23 +69,56 @@
         .signature {
             font-family: 'Charmonman', cursive; font-size: 22px; font-weight: 900; color: #fff;
             text-shadow: 0 0 10px #ff4d6d; animation: glow 2s infinite ease-in-out; text-decoration: none;
-            display: inline-block;
+            display: inline-block; cursor: pointer;
         }
         @keyframes glow { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
 
-        .secret-heart {
-            position: absolute; bottom: 20px; left: 20px; font-size: 22px; cursor: pointer;
-            z-index: 50; animation: pulse 1.5s infinite;
+        /* Password Verification Section */
+        #pass-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95);
+            display: none; justify-content: center; align-items: center; z-index: 500;
         }
+        .pass-box {
+            background: #1a0005; border: 2px solid #ff4d6d; padding: 30px; border-radius: 20px; text-align: center;
+        }
+        .pass-box input {
+            background: transparent; border: 1px solid #ff4d6d; color: white; padding: 10px;
+            border-radius: 10px; margin-top: 15px; text-align: center; outline: none; width: 100%;
+        }
+        .pass-btn {
+            background: #ff4d6d; color: white; border: none; padding: 8px 20px;
+            border-radius: 15px; margin-top: 15px; cursor: pointer; font-weight: bold;
+        }
+
+        /* Full Screen Photo Page with New Background */
+        #photo-page {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle, #ff8e72 0%, #ff4d6d 50%, #1a0005 100%);
+            z-index: 1000; justify-content: center; align-items: center;
+        }
+        .full-screen-photo {
+            max-width: 100%; max-height: 100%; object-fit: contain;
+            animation: fadeInScale 2s ease;
+        }
+        @keyframes fadeInScale {
+            0% { opacity: 0; transform: scale(0.7); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        .back-from-photo {
+            position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%);
+            background: rgba(255, 77, 109, 0.7); color: white; border: none;
+            padding: 8px 20px; border-radius: 20px; cursor: pointer; font-weight: bold;
+        }
+
+        /* Popups & Elements */
+        .secret-heart { position: absolute; bottom: 20px; left: 20px; font-size: 22px; cursor: pointer; z-index: 50; animation: pulse 1.5s infinite; }
         @keyframes pulse { 0% { transform: scale(1); opacity: 0.6; } 50% { transform: scale(1.3); opacity: 1; } 100% { transform: scale(1); opacity: 0.6; } }
 
         .heart { position: absolute; top: -10%; animation: fall linear infinite; z-index: 5; }
         @keyframes fall { 0% { transform: translateY(-10vh) rotate(0deg); opacity: 0; } 20% { opacity: 1; } 100% { transform: translateY(110vh) rotate(360deg); opacity: 0; } }
 
-        .overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9);
-            display: none; justify-content: center; align-items: center; z-index: 200;
-        }
+        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); display: none; justify-content: center; align-items: center; z-index: 200; }
         .popup-box { background: #1a0005; border: 2px solid #ff4d6d; padding: 25px; border-radius: 25px; text-align: center; width: 85%; color: white; }
         .close-btn { margin-top: 15px; background: #ff4d6d; border: none; padding: 8px 20px; border-radius: 20px; color: white; font-weight: bold; cursor: pointer;}
     </style>
@@ -89,29 +126,39 @@
 <body onclick="createTouchHeart(event)">
 
     <div class="bg-image"></div>
-    <div class="anniversary-badge">Since 14 Jan 2026 ❤️</div>
+    
+    <div id="main-page">
+        <div class="anniversary-badge">Since 14 Jan 2026 ❤️</div>
+        <div class="secret-heart" onclick="showSecret()">💝</div>
 
-    <div class="secret-heart" onclick="showSecret()">💝</div>
-
-    <div class="glass-card">
-        <img class="profile-img" src="https://dl.dropbox.com/scl/fi/6fhstrs98al1jnkyvqg53/IMG_20260213_221832.jpg?rlkey=zfd54i959tqou8ruzc4jir1zv&st=qbp024wr&dl=1">
-        
-        <div class="countdown-box">
-            <div id="day-counter" class="days-count">Calculating...</div>
+        <div class="glass-card">
+            <img class="profile-img" src="https://dl.dropbox.com/scl/fi/6fhstrs98al1jnkyvqg53/IMG_20260213_221832.jpg?rlkey=zfd54i959tqou8ruzc4jir1zv&st=qbp024wr&dl=1">
+            <div class="countdown-box"><div id="day-counter" class="days-count">Calculating...</div></div>
+            <h1>Only for You Munnu</h1>
+            <div id="typing-text"></div>
+            <button class="btn-magic" onclick="showLove()">ভালোবাসা দেখো</button>
+            <div class="goals-box">
+                <div class="goals-title">🏹 আমাদের লক্ষ্য (Couple Goals)</div>
+                <div class="goals-text">"ইনশাআল্লাহ খুব শীঘ্রই তোমাকে বিয়ে করে জীবনসঙ্গিনী হিসেবে নিজের করে নেবো। সুখে-দুঃখে সব সময় তোমার পাশে থাকার অঙ্গীকার করছি। আজ ভালোবাসি, আর খুব শীঘ্রই তোমাকেই আমার বাবুর আম্মু বলে ডাকবো।🤍💍"</div>
+            </div>
+            <br>
+            <div class="signature" onclick="askPassword()">তোমার রাফি ❤️</div>
         </div>
+    </div>
 
-        <h1>Only for You Munnu</h1>
-        <div id="typing-text"></div>
-        
-        <button class="btn-magic" onclick="showLove()">ভালোবাসা দেখো</button>
-
-        <div class="goals-box">
-            <div class="goals-title">🏹 আমাদের লক্ষ্য (Couple Goals)</div>
-            <div class="goals-text">"ইনশাআল্লাহ খুব শীঘ্রই তোমাকে বিয়ে করে জীবনসঙ্গিনী হিসেবে নিজের করে নেবো। সুখে-দুঃখে সব সময় তোমার পাশে থাকার অঙ্গীকার করছি। আজ ভালোবাসি, আর খুব শীঘ্রই তোমাকেই আমার বাবুর আম্মু বলে ডাকবো।🤍💍"</div>
+    <div id="pass-overlay">
+        <div class="pass-box">
+            <h3 style="color: #ff4d6d;">পাসওয়ার্ড দিন</h3>
+            <p style="font-size: 12px; margin-top: 5px;">গোপন মুহূর্তটি দেখতে পাসওয়ার্ড প্রয়োজন</p>
+            <input type="password" id="passInput" placeholder="এখানে লিখুন...">
+            <button class="pass-btn" onclick="checkPassword()">প্রবেশ করুন</button>
+            <p id="error-msg" style="color: yellow; font-size: 11px; margin-top: 10px; display: none;">ভুল পাসওয়ার্ড! আবার চেষ্টা করো।</p>
         </div>
-        
-        <br>
-        <a href="https://www.facebook.com31" target="_blank" class="signature">তোমার রাফি ❤️</a>
+    </div>
+
+    <div id="photo-page">
+        <img src="https://i.supaimg.com/5279356f-a8e6-4ce6-b452-1f223bcfb816/238d1c6b-22a2-49ab-8c08-3f8ffa704ad3.png" class="full-screen-photo">
+        <button class="back-from-photo" onclick="backToMain()">ফিরে যাও</button>
     </div>
 
     <div id="overlay-normal" class="overlay">
@@ -150,6 +197,41 @@
         let i = 0;
         function typing() { if (i < text.length) { document.getElementById("typing-text").innerHTML += text.charAt(i); i++; setTimeout(typing, 30); } }
 
+        function askPassword() {
+            // Check if already authenticated in this session
+            if (sessionStorage.getItem('authenticated') === 'true') {
+                showPhotoPage();
+            } else {
+                document.getElementById('pass-overlay').style.display = 'flex';
+            }
+        }
+        
+        function checkPassword() {
+            const input = document.getElementById('passInput').value;
+            if (input === "Rafika") {
+                // Store authentication in session storage
+                sessionStorage.setItem('authenticated', 'true');
+                showPhotoPage();
+                document.getElementById('pass-overlay').style.display = 'none';
+            } else { document.getElementById('error-msg').style.display = 'block'; }
+        }
+
+        function showPhotoPage() {
+            document.getElementById('main-page').style.display = 'none';
+            document.getElementById('photo-page').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function backToMain() {
+            // Optional: Clear authentication when going back to require password again
+            // sessionStorage.removeItem('authenticated'); 
+            
+            // Re-show the main page and typing animation
+            document.getElementById('photo-page').style.display = 'none';
+            document.getElementById('main-page').style.display = 'flex';
+            document.body.style.overflow = 'auto'; // Re-enable scrolling
+        }
+
         function createHeart() {
             const h = document.createElement('div'); h.classList.add('heart');
             h.innerHTML = ['❤️', '💖', '🌹', '💕'][Math.floor(Math.random()*4)];
@@ -159,7 +241,7 @@
         setInterval(createHeart, 400);
 
         function createTouchHeart(e) {
-            if(e.target.tagName === 'BUTTON' || e.target.tagName === 'A') return;
+            if(e.target.tagName === 'BUTTON' || e.target.classList.contains('signature')) return;
             const th = document.createElement('div'); th.innerHTML = '❤️';
             th.style.position = 'fixed'; th.style.left = e.clientX + 'px'; th.style.top = e.clientY + 'px';
             th.style.pointerEvents = 'none'; th.style.animation = 'fall 1s forwards'; document.body.appendChild(th);
@@ -170,7 +252,14 @@
         function showSecret() { if (navigator.vibrate) navigator.vibrate([50,50,50]); document.getElementById('overlay-secret').style.display = 'flex'; }
         function closePopup(id) { document.getElementById(id).style.display = 'none'; }
 
-        window.onload = typing;
+        // Trigger typing on initial load
+        window.onload = function() {
+            typing();
+            // Optional: Re-show photo page if already authenticated on a page refresh
+            if (sessionStorage.getItem('authenticated') === 'true' && document.getElementById('main-page').style.display === 'none') {
+                 showPhotoPage();
+            }
+        };
     </script>
 </body>
 </html>
