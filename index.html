@@ -1,27 +1,12 @@
-;<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="bn">
 <head>
     <meta charset="UTF-8">
-
-    <!-- Google Search Console Verification -->
     <meta name="google-site-verification" content="4YhRDt5orcyd0D7nIem7u8ZeDK7fQ9C8d93G04uDoLY" />
-<title>Surprise For Munnu ❤️ | Our Love Story – Rafi & Munnu & Rafika</title>
-<head>
+    <title>Surprise For Munnu ❤️ | Our Love Story – Rafi & Munnu & Rafika</title>
     <link rel="icon" type="image/jpeg" href="https://i.supaimg.com/5279356f-a8e6-4ce6-b452-1f223bcfb816/8381ff24-4a09-45be-a234-21dc51e94c6f.jpg">
-    
     <meta property="og:image" content="https://i.supaimg.com/5279356f-a8e6-4ce6-b452-1f223bcfb816/8381ff24-4a09-45be-a234-21dc51e94c6f.jpg">
-    
-    <link rel="apple-touch-icon" href="https://i.supaimg.com/5279356f-a8e6-4ce6-b452-1f223bcfb816/8381ff24-4a09-45be-a234-21dc51e94c6f.jpg">
-</head>
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Love Story | Munnu & Rafi</title>
-
-<meta name="description" content="Romantic love story website of Munni and Rafi. A beautiful surprise website created with love.">
-<meta name="keywords" content="Munni Rafi love story, surprise for munni, romantic website, rafir bou munnu,Rafika ammu munnu,munnu and rafi love story">
-<meta name="robots" content="index, follow">
-<meta name="author" content="Rafi">
-
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;500;700&family=Dancing+Script:wght@700&family=Parisienne&family=Charmonman:wght@700&display=swap');
 
@@ -39,7 +24,6 @@
             overflow-x: hidden; scroll-behavior: smooth;
         }
 
-        /* Fixed Background Animation */
         .bg-fixed {
             position: fixed; inset: 0;
             background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.8)), 
@@ -72,49 +56,52 @@
         .counter-box span { display: block; font-size: 22px; font-weight: bold; color: var(--primary-pink); }
 
         h1 { font-family: 'Dancing Script', cursive; font-size: 34px; color: var(--primary-pink); margin-bottom: 12px; }
-        
-        /* Timeline */
+
+        /* Spotify Player UI */
+        .spotify-player {
+            background: rgba(255, 255, 255, 0.07); border-radius: 25px; padding: 15px;
+            margin: 20px 0; border: 1px solid var(--border); text-align: left;
+        }
+        .song-info-top { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+        .album-art {
+            width: 60px; height: 60px; border-radius: 10px;
+            background: url('https://i.supaimg.com/5279356f-a8e6-4ce6-b452-1f223bcfb816/8381ff24-4a09-45be-a234-21dc51e94c6f.jpg') center/cover;
+            flex-shrink: 0;
+        }
+        .song-meta h4 { font-size: 14px; color: #fff; margin-bottom: 2px; }
+        .song-meta p { font-size: 10px; color: rgba(255,255,255,0.6); line-height: 1.3; }
+        .progress-container { width: 100%; height: 4px; background: rgba(255,255,255,0.1); border-radius: 5px; margin: 10px 0; cursor: pointer; }
+        .progress-bar { height: 100%; background: var(--primary-pink); width: 0%; border-radius: 5px; }
+        .play-pause-btn { background: #fff; width: 35px; height: 35px; border-radius: 50%; border: none; color: #000; cursor: pointer; display: block; margin: 0 auto; font-size: 16px; }
+
+        /* Rest of the original CSS */
         .timeline { position: relative; width: 100%; max-width: 360px; border-left: 2px dashed rgba(255,77,109,0.4); padding-left: 25px; }
         .timeline-item { margin-bottom: 40px; position: relative; opacity: 0; transform: translateX(-30px); transition: 1.2s ease-out; }
         .timeline-item.active { opacity: 1; transform: translateX(0); }
         .timeline-item::before { content: '🌸'; position: absolute; left: -36px; top: -2px; }
-
-        /* Love Letter Style */
-        .letter-container {
-            width: 100%; max-width: 350px; background: #fffaf0; color: #333;
-            padding: 30px; border-radius: 5px; position: relative;
-            box-shadow: 10px 10px 30px rgba(0,0,0,0.5);
-            font-family: 'Charmonman', cursive; border-left: 5px solid var(--primary-pink);
-            transform: rotate(-1deg); margin-top: 20px; display: none;
-            animation: openLetter 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-        }
-        @keyframes openLetter { from { transform: scale(0.5) rotate(-10deg); opacity: 0; } to { transform: scale(1) rotate(-1deg); opacity: 1; } }
-        .letter-text { font-size: 16px; line-height: 1.6; color: #444; }
-
-        .btn-magic {
-            background: linear-gradient(45deg, var(--primary-pink), #c9184a); color: white; border: none; padding: 13px 35px;
-            border-radius: 30px; font-weight: bold; cursor: pointer; transition: 0.3s;
-        }
-
+        .letter-container { width: 100%; max-width: 350px; background: #fffaf0; color: #333; padding: 30px; border-radius: 5px; box-shadow: 10px 10px 30px rgba(0,0,0,0.5); font-family: 'Charmonman', cursive; border-left: 5px solid var(--primary-pink); display: none; margin-top: 20px; animation: openLetter 0.8s forwards; }
+        .btn-magic { background: linear-gradient(45deg, var(--primary-pink), #c9184a); color: white; border: none; padding: 13px 35px; border-radius: 30px; font-weight: bold; cursor: pointer; transition: 0.3s; }
         .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.96); backdrop-filter: blur(20px); display: none; justify-content: center; align-items: center; z-index: 1000; padding: 20px; }
-        
-        /* Moving Text */
-        .moving-hearts { position: absolute; width: 100%; height: 100%; overflow: hidden; pointer-events: none; top: 0; left: 0; }
-        .heart-float { position: absolute; bottom: -80px; color: var(--primary-pink); font-size: 18px; animation: floatUpName 10s linear infinite; opacity: 0.7; font-weight: bold; white-space: nowrap; }
+        .heart-float { position: absolute; bottom: -80px; color: var(--primary-pink); font-size: 18px; animation: floatUpName 10s linear infinite; opacity: 0.7; font-weight: bold; }
         @keyframes floatUpName { to { transform: translateY(-115vh) rotate(360deg); opacity: 0; } }
+        @keyframes openLetter { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
     </style>
 </head>
-<body onclick="createHeart(event)">
+<body onclick="startAll(event)">
 
     <canvas id="canvas-bg"></canvas>
     <div class="bg-fixed"></div>
-    <div class="moving-hearts" id="hearts-container"></div>
+    <div id="hearts-container"></div>
+
+    <audio id="mainAudio" loop>
+        <source src="https://ancient-aquamarine-8c9fcupl1t.edgeone.app/শুধু%20তোমার%20জন্য%20মুন্নু.mp3" type="audio/mpeg">
+    </audio>
 
     <section class="section">
         <div class="glass-card">
             <div class="badge">Celebrating Love Since 14 Jan 2026 ❤️</div>
             <img src="https://dl.dropbox.com/scl/fi/6fhstrs98al1jnkyvqg53/IMG_20260213_221832.jpg?rlkey=zfd54i959tqou8ruzc4jir1zv&st=qbp024wr&dl=1" 
-                 style="width: 105px; height: 105px; border-radius: 50%; border: 3px solid var(--primary-pink); padding: 4px; margin-bottom: 15px; object-fit: cover;">
+                 style="width: 100px; height: 100px; border-radius: 50%; border: 3px solid var(--primary-pink); margin-bottom: 15px; object-fit: cover;">
             
             <div class="counter-grid">
                 <div class="counter-box"><span id="days">0</span><small>দিন</small></div>
@@ -123,158 +110,159 @@
             </div>
 
             <h1>Only for You Munnu</h1>
-            <div id="typing-text" style="min-height: 80px; font-size: 14px; line-height: 1.6;"></div>
+            <div id="typing-text" style="min-height: 70px; font-size: 14px; margin-bottom: 15px;"></div>
+
+            <div class="spotify-player">
+                <div class="song-info-top">
+                    <div class="album-art"></div>
+                    <div class="song-meta">
+                        <h4>শুধু তোমার জন্য মুন্নু</h4>
+                        <p>“শুধু তোমার জন্য” — Munnu আর এই রাফির ভালোবাসার ছোট্ট গল্প। দূরত্বের মাঝেও একে অপরকে ধরে রাখার প্রতিশ্রুতি, আর একসাথে ভবিষ্যৎ গড়ার স্বপ্ন এই গানটায় বেঁচে আছে।</>
+                 </div>
+                </div>
+                <div class="progress-container" id="progCont">
+                    <div class="progress-bar" id="progBar"></div>
+                </div>
+                <button class="play-pause-btn" onclick="togglePlay()"><span id="playIcon">▶</span></button>
+            </div>
 
             <button class="btn-magic" onclick="showPopup('overlay-msg')">ভালোবাসার বার্তা</button>
-            <br>
-            <div class="signature" onclick="openAuth()" style="font-family: 'Charmonman'; cursor: pointer; margin-top: 20px; font-size: 24px;">তোমার রাফি ❤️</div>
+            <div class="signature" onclick="openAuth()" style="font-family: 'Charmonman'; cursor: pointer; margin-top: 20px; font-size: 22px;">তোমার রাফি ❤️</div>
         </div>
     </section>
 
-    <section class="section" style="background: rgba(0,0,0,0.5);">
-        <h2 style="font-family: 'Parisienne', cursive; font-size: 38px; color: var(--accent-gold); margin-bottom: 50px;">Our Journey Story</h2>
+    <section class="section" style="background: rgba(0,0,0,0.4);">
+        <h2 style="font-family: 'Parisienne'; font-size: 35px; color: var(--accent-gold); margin-bottom: 40px;">Our Journey Story</h2>
         <div class="timeline">
             <div class="timeline-item">
                 <span style="color:var(--accent-gold); font-weight: bold;">১৪ জানুয়ারি, ২০২৬</span>
-                <p style="font-size: 13.5px; margin-top: 5px;">সেই জাদুকরী মুহূর্ত! যখন প্রথমবার তোমার চোখের দিকে তাকিয়েছিলাম। ❤️</p>
+                <p>সেই জাদুকরী মুহূর্ত! যখন প্রথমবার তোমার চোখের দিকে তাকিয়েছিলাম। ❤️</p>
             </div>
             <div class="timeline-item">
                 <span style="color:var(--accent-gold); font-weight: bold;">পবিত্র এক মাস</span>
-                <p style="font-size: 13.5px; margin-top: 5px;">১৪ ফেব্রুয়ারি ভালোবাসা দিবসে আমাদের প্রথম মাস পূর্ণ হলো। প্রতিটি দিন ছিল এক একটি অলৌকিক মুহুর্ত। 🌹</p>
+                <p>১৪ ফেব্রুয়ারি ভালোবাসা দিবস। আমাদের প্রথম মাস পূর্ণ হলো।</p>
             </div>
             <div class="timeline-item">
                 <span style="color:var(--accent-gold); font-weight: bold;">আমাদের স্বপ্ন: রাফিকা 👧</span>
-                <p style="font-size: 13.5px; margin-top: 5px;">আমাদের ভালোবাসার প্রতীক হবে আমাদের মেয়ে **রাফিকা**। আমি স্বপ্ন দেখি সে হবে তোমার মতোই মায়াবী। ✨</p>
+                <p>আমাদের ভালোবাসার প্রতীক হবে আমাদের মেয়ে রাফিকা।</p>
             </div>
         </div>
     </section>
 
     <section class="section">
-        <h2 style="margin-bottom: 30px;">Love Letters for You 💌</h2>
-        <button class="btn-magic" onclick="nextLetter()" style="margin-bottom: 20px;">চিঠি পরো ❤️</button>
+        <h2>Love Letters for You 💌</h2>
+        <button class="btn-magic" onclick="nextLetter()" style="margin: 20px 0;">চিঠি পরো ❤️</button>
         <div id="letter-box" class="letter-container">
-            <p id="letter-content" class="letter-text"></p>
+            <p id="letter-content"></p>
         </div>
     </section>
 
-    <section class="section" style="background: rgba(0,0,0,0.5);">
-        <h2 style="margin-bottom: 40px;">Open Your Gift 🎁</h2>
-        <div style="cursor: pointer; font-size: 80px; filter: drop-shadow(0 0 15px gold);" onclick="openGift()">
-            <div id="gift-icon">🎁</div>
-        </div>
-        <p id="gift-msg" style="margin-top: 40px; font-weight: bold; color: var(--primary-pink); text-align: center; max-width: 300px; min-height: 50px;"></p>
+    <section class="section" style="background: rgba(0,0,0,0.4);">
+        <h2>Open Your Gift 🎁</h2>
+        <div style="cursor: pointer; font-size: 70px;" onclick="openGift()" id="gift-icon">🎁</div>
+        <p id="gift-msg" style="margin-top: 20px; color: var(--primary-pink); font-weight: bold;"></p>
     </section>
 
     <div id="overlay-msg" class="overlay">
         <div class="glass-card">
-            <span style="font-size: 50px;">🌹</span>
-            <h3 style="margin: 15px 0;">I Love You!</h3>
-            <p>মুন্নু, তুমি আমার জীবনের শ্রেষ্ঠ উপহার। ইনশাআল্লাহ আমরা আজীবন এভাবেই হাত ধরে থাকবো।</p>
-            <button class="btn-magic" style="margin-top: 20px;" onclick="closePopup('overlay-msg')">Love You Too ❤️</button>
+            <span style="font-size: 40px;">🌹</span>
+            <h3>I Love You!</h3>
+            <p>মুন্নু, তুমি আমার জীবনের শ্রেষ্ঠ উপহার।</p>
+            <button class="btn-magic" onclick="closePopup('overlay-msg')">Love You Too ❤️</button>
         </div>
     </div>
 
     <div id="pass-overlay" class="overlay">
         <div class="glass-card" id="auth-card">
             <h3>গোপন গ্যালারি 🔐</h3>
-            <input type="password" id="passInput" placeholder="পাসওয়ার্ড দাও মুন্নু..." style="width: 100%; padding: 12px; margin: 20px 0; border-radius: 10px; border: none; text-align: center;">
-            <button class="btn-magic" style="width: 100%;" onclick="checkAuth()">প্রবেশ করো।</button>
+            <input type="password" id="passInput" placeholder="Password?" style="width: 100%; padding: 12px; margin: 15px 0; border-radius: 10px; border: none; text-align: center;">
+            <button class="btn-magic" onclick="checkAuth()">প্রবেশ করো</button>
         </div>
     </div>
 
     <div id="gallery-overlay" class="overlay">
         <div class="glass-card">
             <h3>Our Secret Moment</h3>
-            <img src="https://i.supaimg.com/5279356f-a8e6-4ce6-b452-1f223bcfb816/547ccb3c-1d91-438a-8282-32d37aa66e9a.jpg" style="width: 100%; border-radius: 15px; margin: 20px 0;">
+            <img src="https://i.supaimg.com/5279356f-a8e6-4ce6-b452-1f223bcfb816/547ccb3c-1d91-438a-8282-32d37aa66e9a.jpg" style="width: 100%; border-radius: 15px; margin: 15px 0;">
             <button class="btn-magic" onclick="closePopup('gallery-overlay')">ফিরে যাও</button>
         </div>
     </div>
 
     <script>
-        // Particle Canvas
-        const canvas = document.getElementById('canvas-bg');
-        const ctx = canvas.getContext('2d');
-        let particles = [];
-        function initCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
-        window.addEventListener('resize', initCanvas);
-        initCanvas();
-        class P { constructor() { this.x=Math.random()*canvas.width; this.y=Math.random()*canvas.height; this.o=Math.random()*0.5; this.s=Math.random()*2; } update() { this.y-=0.4; if(this.y<0) this.y=canvas.height; } draw() { ctx.fillStyle=`rgba(255,255,255,${this.o})`; ctx.beginPath(); ctx.arc(this.x,this.y,this.s,0,Math.PI*2); ctx.fill(); } }
-        for(let i=0; i<60; i++) particles.push(new P());
-        function animate() { ctx.clearRect(0,0,canvas.width,canvas.height); particles.forEach(p=>{p.update();p.draw();}); requestAnimationFrame(animate); }
-        animate();
+        const audio = document.getElementById('mainAudio');
+        let isStarted = false;
 
-        // Updated Floating Messages
-        function spawnFloating() {
-            const container = document.getElementById('hearts-container');
-            const texts = ["Love you Munnu 🫶🏼🥺", "কুত্তি রে 😫🫀"];
-            const div = document.createElement('div');
-            div.className = 'heart-float';
-            div.innerText = texts[Math.floor(Math.random()*texts.length)];
-            div.style.left = Math.random() * 80 + 'vw';
-            // Randomly scale size slightly for variety
-            div.style.fontSize = (Math.random() * 5 + 15) + 'px';
-            container.appendChild(div);
-            setTimeout(() => div.remove(), 10000);
-        }
-        setInterval(spawnFloating, 2000);
-
-        // Love Letters Content
-        const letters = [
-            "প্রিয় মুন্নু, তুমি জানো কি? তোমার হাসিতে আমার পুরো পৃথিবী থমকে যায়। প্রতিটি নিঃশ্বাসে আমি শুধু তোমারই অস্তিত্ব অনুভব করি।",
-            "আমাদের ভালোবাসার সবচেয়ে সুন্দর রূপ হবে আমাদের ছোট্ট রাফিকা। আমি স্বপ্ন দেখি সে বড় হয়ে ঠিক তোমার মতোই মায়াবী আর লক্ষ্মী হবে।",
-            "১৪ জানুয়ারি দিনটি আমার কাছে শ্রেষ্ঠ। কারণ সেদিন ভাগ্য আমাকে তোমার ঠিকানায় নিয়ে এসেছিল। আমি আজীবন তোমার এই হাতটা এভাবেই শক্ত করে ধরে রাখতে চাই।",
-            "হয়তো আমি তোমাকে সব সুখ দিতে পারবো না, কিন্তু এটা নিশ্চিত থাকো যে আমি তোমাকে সারাজীবন পৃথিবীর সবচেয়ে বেশি সম্মান আর ভালোবাসা দেবো।",
-            "ইনশাআল্লাহ, খুব শীঘ্রই আমাদের নিজস্ব একটা সুখের স্বর্গ হবে, যেখানে আমাদের রাজকুমারী রাফিকাকে নিয়ে আমরা হারিয়ে যাবো ভালোবাসার গল্পে।"
-        ];
-        let currentLetter = 0;
-
-        function nextLetter() {
-            const box = document.getElementById('letter-box');
-            const content = document.getElementById('letter-content');
-            box.style.display = 'block';
-            content.innerText = letters[currentLetter];
-            currentLetter = (currentLetter + 1) % letters.length;
-            if(navigator.vibrate) navigator.vibrate(50);
+        function startAll(e) {
+            createHeart(e);
+            if(!isStarted) {
+                audio.play();
+                document.getElementById('playIcon').innerText = "⏸";
+                typing();
+                isStarted = true;
+            }
         }
 
-        // Counter Logic
+        function togglePlay() {
+            if(audio.paused) { audio.play(); document.getElementById('playIcon').innerText = "⏸"; }
+            else { audio.pause(); document.getElementById('playIcon').innerText = "▶"; }
+            event.stopPropagation();
+        }
+
+        audio.ontimeupdate = () => {
+            document.getElementById('progBar').style.width = (audio.currentTime / audio.duration) * 100 + "%";
+        };
+
+        document.getElementById('progCont').onclick = (e) => {
+            audio.currentTime = (e.offsetX / e.currentTarget.clientWidth) * audio.duration;
+            event.stopPropagation();
+        };
+
+        // Counter
         const start = new Date("January 14, 2026 16:00:00").getTime();
         setInterval(() => {
-            const now = new Date().getTime(); const d = now - start;
+            const d = new Date().getTime() - start;
             document.getElementById('days').innerText = Math.floor(d/(1000*60*60*24));
             document.getElementById('hours').innerText = Math.floor((d%(1000*60*60*24))/(1000*60*60));
             document.getElementById('mins').innerText = Math.floor((d%(1000*60*60))/(1000*60));
         }, 1000);
 
-        // Typing Effect
+        // Typing
         const typeText = "মুন্নু, অনেক ভালবাসি বিশ্বাস করো। তুমি আমার অস্তিত্বের অংশ। আমাদের ভালোবাসা এবং আমাদের আগামীর স্বপ্ন 'রাফিকা' আমাদের ঘরকে পূর্ণতা দেবে। ভালোবাসি অনেক!";
         let tIdx = 0;
-        function typing() { if(tIdx<typeText.length) { document.getElementById('typing-text').innerHTML += typeText.charAt(tIdx); tIdx++; setTimeout(typing, 60); } }
+        function typing() { if(tIdx < typeText.length) { document.getElementById('typing-text').innerHTML += typeText.charAt(tIdx); tIdx++; setTimeout(typing, 50); } }
 
-        // Gift
-        const loveMsgs = ["খুব শীগ্রই বিয়ে করবো! 💍", "তুমি আমার কলিজা! ❤️", "রাফিকা হবে আমাদের জান! 👧", "ইনশাআল্লাহ আমরা সুখী হবো! ✨"];
-        function openGift() {
-            document.getElementById('gift-icon').innerHTML = "💖";
-            document.getElementById('gift-msg').innerText = loveMsgs[Math.floor(Math.random()*loveMsgs.length)];
-        }
+        // Floating Hearts & Background
+        const canvas = document.getElementById('canvas-bg');
+        const ctx = canvas.getContext('2d');
+        let parts = [];
+        function init() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+        window.onresize = init; init();
+        class P { constructor() { this.x=Math.random()*canvas.width; this.y=Math.random()*canvas.height; this.s=Math.random()*2; } update() { this.y-=0.5; if(this.y<0) this.y=canvas.height; } draw() { ctx.fillStyle='white'; ctx.beginPath(); ctx.arc(this.x,this.y,this.s,0,Math.PI*2); ctx.fill(); } }
+        for(let i=0; i<50; i++) parts.push(new P());
+        function anim() { ctx.clearRect(0,0,canvas.width,canvas.height); parts.forEach(p=>{p.update();p.draw();}); requestAnimationFrame(anim); }
+        anim();
 
-        // Observer & Auth
-        const observer = new IntersectionObserver((entries) => { entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('active'); }); });
-        document.querySelectorAll('.timeline-item').forEach(el => observer.observe(el));
+        setInterval(() => {
+            const div = document.createElement('div'); div.className = 'heart-float';
+            div.innerText = ["Love you Munnu 🫶🏼", "কুত্তি রে 😫🫀"][Math.floor(Math.random()*2)];
+            div.style.left = Math.random()*80+'vw'; document.getElementById('hearts-container').appendChild(div);
+            setTimeout(() => div.remove(), 10000);
+        }, 2000);
 
-        function openAuth() { document.getElementById('pass-overlay').style.display = 'flex'; }
-        function checkAuth() {
-            if(document.getElementById('passInput').value === "Rafika") { closePopup('pass-overlay'); showPopup('gallery-overlay'); }
-            else { document.getElementById('auth-card').classList.add('shake'); setTimeout(() => document.getElementById('auth-card').classList.remove('shake'), 400); }
-        }
+        // Others
+        const letters = ["প্রিয় মুন্নু, তুমি জানো কি? তোমার হাসিতে আমার পুরো পৃথিবী থমকে যায়।", "আমাদের ভালোবাসার সবচেয়ে সুন্দর রূপ হবে আমাদের ছোট্ট রাফিকা।", "১৪ জানুয়ারি দিনটি আমার কাছে শ্রেষ্ঠ। আমি আজীবন তোমার হাতটা ধরে রাখতে চাই।"];
+        let lIdx = 0;
+        function nextLetter() { document.getElementById('letter-box').style.display='block'; document.getElementById('letter-content').innerText=letters[lIdx]; lIdx=(lIdx+1)%letters.length; }
 
-        function createHeart(e) {
-            const h = document.createElement('div'); h.innerHTML = '❤️'; h.style.position='fixed'; h.style.left=e.clientX+'px'; h.style.top=e.clientY+'px'; h.style.pointerEvents='none'; h.style.animation='floatUpName 1.5s forwards'; document.body.appendChild(h); setTimeout(() => h.remove(), 1500);
-        }
+        function openGift() { document.getElementById('gift-icon').innerText="💖"; document.getElementById('gift-msg').innerText="খুব শীঘ্রই বিয়ে করবো! 💍"; }
+        function openAuth() { document.getElementById('pass-overlay').style.display='flex'; }
+        function checkAuth() { if(document.getElementById('passInput').value === "Rafika") { closePopup('pass-overlay'); showPopup('gallery-overlay'); } }
+        function showPopup(id) { document.getElementById(id).style.display='flex'; }
+        function closePopup(id) { document.getElementById(id).style.display='none'; }
+        function createHeart(e) { const h = document.createElement('div'); h.innerHTML = '❤️'; h.style.position='fixed'; h.style.left=e.clientX+'px'; h.style.top=e.clientY+'px'; h.style.animation='floatUpName 1.5s forwards'; document.body.appendChild(h); setTimeout(()=>h.remove(), 1500); }
 
-        function showPopup(id) { document.getElementById(id).style.display = 'flex'; }
-        function closePopup(id) { document.getElementById(id).style.display = 'none'; }
-        window.onload = typing;
+        const obs = new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('active')})});
+        document.querySelectorAll('.timeline-item').forEach(el=>obs.observe(el));
     </script>
 </body>
 </html>
