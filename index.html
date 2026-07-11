@@ -334,6 +334,30 @@
 
         @keyframes floatUpName { 0% { transform: translateY(0) rotate(0deg); opacity: 1; } 90% { opacity: 0.7; } 100% { transform: translateY(-130vh) rotate(360deg); opacity: 0; } }
         @keyframes openLetter { from { transform: scale(0.85); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+        /* জন্মদিন সেকশন */
+        .bday-glow { text-shadow: 0 0 12px var(--blue-glow), 0 0 22px var(--pink-glow); }
+        .bday-msg { font-size: 14px; line-height: 1.9; margin: 16px 0 24px; color: var(--text-color); font-weight: 500; opacity: 0.95; }
+        .bday-countdown { font-family: 'Dancing Script', cursive; font-size: 30px; color: #fff; margin-bottom: 4px; text-shadow: 0 0 12px var(--blue-glow); }
+        .bday-count-label { font-size: 11px; color: var(--text-muted); margin-bottom: 22px; letter-spacing: 0.5px; }
+        .bday-btn-row { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 8px; }
+
+        .bday-glow-btn { animation: bdayPulse 1.8s ease-in-out infinite; }
+        @keyframes bdayPulse {
+            0%, 100% { box-shadow: 0 8px 32px rgba(0,0,0,0.3), 0 0 0px var(--blue-glow); }
+            50% { box-shadow: 0 8px 32px rgba(0,0,0,0.3), 0 0 26px var(--primary-blue); }
+        }
+        .bday-love-btn { animation: bdayPulse2 2.2s ease-in-out infinite; }
+        @keyframes bdayPulse2 {
+            0%, 100% { box-shadow: 0 8px 32px rgba(0,0,0,0.3), 0 0 0px var(--pink-glow); }
+            50% { box-shadow: 0 8px 32px rgba(0,0,0,0.3), 0 0 26px var(--love-pink); }
+        }
+
+        #birthday-fx-canvas {
+            position: fixed; inset: 0; z-index: 4; pointer-events: none;
+            opacity: 0; transition: opacity 0.6s ease;
+        }
+        #birthday-fx-canvas.active { opacity: 1; }
     </style>
 </head>
 <body onclick="startAll(event)">
@@ -376,6 +400,7 @@
             <li><a href="#" onclick="scrollToSection(2)">Our Journey 🗺️</a></li>
             <li><a href="#" onclick="scrollToSection(3)">Love Letters 💌</a></li>
             <li><a href="#" onclick="scrollToSection(4)">Secret Gift 🎁</a></li>
+            <li><a href="#" onclick="scrollToSection(5)">Happy Birthday 🎂</a></li>
         </ul>
     </div>
 
@@ -475,6 +500,25 @@
         <h2>Open Your Gift 🎁</h2>
         <div style="cursor: pointer; font-size: 75px; margin-top: 20px; transition: transform 0.2s;" onclick="openGift(event)" id="gift-icon" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">🎁</div>
         <p id="gift-msg" style="margin-top: 25px; color: var(--love-pink); font-weight: 700; font-size: 18px; text-shadow: 0 0 10px var(--pink-glow);"></p>
+    </section>
+
+    <section class="section" id="sec-5">
+        <canvas id="birthday-fx-canvas"></canvas>
+        <div class="glass-card" style="max-width: 400px;">
+            <div class="badge">🎂 Happy Birthday Munnu 🎂</div>
+
+            <h1 class="bday-glow" style="font-size: 28px; line-height: 1.4;">শুভ জন্মদিন আমার বউ মুন্নু 💍</h1>
+
+            <p class="bday-msg">তোমার জামাই তোমাকে সবসময় অনেক অনেক ভালোবাসে। তুমি আমার জীবনের সবচেয়ে সুন্দর উপহার, আমার প্রতিটা দিনের শান্তি, আমার সবচেয়ে বড় ভালোবাসা। তোমার এই বিশেষ দিনে চাই তোমার মুখে ঠিক এমনই একটা হাসি লেগে থাকুক সারাদিন। জন্মদিনের অনেক অনেক শুভেচ্ছা, আমার মুন্নু। ভালোবাসি তোমায়, আজ, কাল, সবসময়, চিরকাল। 🎂❤️</p>
+
+            <div id="bday-countdown" class="bday-countdown">--:--:--</div>
+            <div class="bday-count-label" id="bday-countdown-label">তোমার স্পেশাল দিন শুরু হতে বাকি</div>
+
+            <div class="bday-btn-row">
+                <button class="btn-magic bday-glow-btn" onclick="bdaySurprise(event)">🎉 সারপ্রাইজ! 🎉</button>
+                <button class="btn-magic bday-love-btn" onclick="bdayLoveBurst(event)">💌 ভালোবাসি তোমায় 💌</button>
+            </div>
+        </div>
     </section>
 
     <div id="overlay-msg" class="overlay" onclick="closePopup('overlay-msg', event)">
@@ -660,6 +704,140 @@
 
         const obs = new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('active')})});
         document.querySelectorAll('.timeline-item').forEach(el=>obs.observe(el));
+
+        /* ================= জন্মদিন সেকশন ================= */
+
+        /* কাউন্টডাউন (রাত ১২টা পর্যন্ত) */
+        function updateBdayCountdown(){
+            const now = new Date();
+            const next = new Date(now);
+            next.setHours(24,0,0,0);
+            const diff = next - now;
+            const cd = document.getElementById('bday-countdown');
+            const lbl = document.getElementById('bday-countdown-label');
+            if(!cd) return;
+            if(diff <= 1000){
+                cd.innerText = "🎉 এখনই! 🎉";
+                lbl.innerText = "শুভ জন্মদিন মুন্নু!";
+                clearInterval(bdayTimer);
+                return;
+            }
+            const h = Math.floor(diff/3600000);
+            const m = Math.floor((diff%3600000)/60000);
+            const s = Math.floor((diff%60000)/1000);
+            cd.innerText = String(h).padStart(2,'0')+":"+String(m).padStart(2,'0')+":"+String(s).padStart(2,'0');
+        }
+        const bdayTimer = setInterval(updateBdayCountdown, 1000);
+        updateBdayCountdown();
+
+        /* ফায়ারওয়ার্ক + কনফেটি ক্যানভাস */
+        const bdayCanvas = document.getElementById('birthday-fx-canvas');
+        const bctx = bdayCanvas.getContext('2d');
+        function bdayResize(){ bdayCanvas.width = window.innerWidth; bdayCanvas.height = window.innerHeight; }
+        bdayResize();
+        window.addEventListener('resize', bdayResize);
+
+        let bdayParticles = [];
+        let bdayConfetti = [];
+        let bdayFireworkInterval = null;
+        let bdayConfettiInterval = null;
+
+        function bdayLaunchFirework(x, y){
+            const colors = ['#00b4d8','#ff4d6d','#48cae4','#ffd6dd','#ffffff'];
+            const color = colors[Math.floor(Math.random()*colors.length)];
+            for(let i=0;i<40;i++){
+                const angle = (Math.PI*2*i)/40;
+                const speed = 2+Math.random()*3;
+                bdayParticles.push({ x, y, vx:Math.cos(angle)*speed, vy:Math.sin(angle)*speed, alpha:1, color });
+            }
+        }
+        function bdaySpawnConfettiBatch(n){
+            const colors = ['#00b4d8','#ff4d6d','#0077b6','#ffd6dd','#ffffff'];
+            for(let i=0;i<n;i++){
+                bdayConfetti.push({
+                    x: Math.random()*bdayCanvas.width, y:-20,
+                    vx:(Math.random()-0.5)*2, vy:2+Math.random()*3,
+                    size:4+Math.random()*6, color:colors[Math.floor(Math.random()*colors.length)],
+                    rot:Math.random()*360, vr:(Math.random()-0.5)*10
+                });
+            }
+        }
+        function bdayAnimate(){
+            bctx.clearRect(0,0,bdayCanvas.width,bdayCanvas.height);
+            bdayParticles.forEach(p=>{
+                p.x+=p.vx; p.y+=p.vy; p.vy+=0.03; p.alpha-=0.015;
+                bctx.globalAlpha = Math.max(p.alpha,0);
+                bctx.fillStyle = p.color;
+                bctx.beginPath(); bctx.arc(p.x,p.y,2.5,0,Math.PI*2); bctx.fill();
+            });
+            bctx.globalAlpha = 1;
+            bdayParticles = bdayParticles.filter(p=>p.alpha>0);
+
+            bdayConfetti.forEach(c=>{ c.x+=c.vx; c.y+=c.vy; c.rot+=c.vr; });
+            bdayConfetti = bdayConfetti.filter(c=>c.y < bdayCanvas.height+20);
+            bdayConfetti.forEach(c=>{
+                bctx.save();
+                bctx.translate(c.x,c.y); bctx.rotate(c.rot*Math.PI/180);
+                bctx.fillStyle = c.color;
+                bctx.fillRect(-c.size/2,-c.size/2,c.size,c.size*0.6);
+                bctx.restore();
+            });
+            requestAnimationFrame(bdayAnimate);
+        }
+        bdayAnimate();
+
+        function bdaySpawnHeartsBurst(n){
+            const pool = ["🎂","🎉","🎈","💙","❤️","✨"];
+            for(let i=0;i<n;i++){
+                setTimeout(()=>{
+                    const div = document.createElement('div');
+                    div.className = 'heart-float';
+                    div.innerText = pool[Math.floor(Math.random()*pool.length)];
+                    div.style.left = Math.random()*85+'vw';
+                    div.style.fontSize = (Math.random()*10+16)+'px';
+                    div.style.animationDuration = (Math.random()*3+6)+'s';
+                    document.getElementById('hearts-container').appendChild(div);
+                    setTimeout(()=>div.remove(), 9000);
+                }, i*50);
+            }
+        }
+
+        function bdaySurprise(event){
+            if(event) event.stopPropagation();
+            bdaySpawnConfettiBatch(200);
+            for(let i=0;i<6;i++){
+                setTimeout(()=>bdayLaunchFirework(Math.random()*bdayCanvas.width, Math.random()*bdayCanvas.height*0.5), i*150);
+            }
+            bdaySpawnHeartsBurst(15);
+        }
+        function bdayLoveBurst(event){
+            if(event) event.stopPropagation();
+            bdayLaunchFirework(bdayCanvas.width/2, bdayCanvas.height/2);
+            bdaySpawnConfettiBatch(80);
+            bdaySpawnHeartsBurst(20);
+        }
+
+        /* বার্থডে সেকশনে স্ক্রল করলে অটোমেটিক ইফেক্ট চালু, বেরিয়ে গেলে বন্ধ */
+        const bdaySection = document.getElementById('sec-5');
+        const bdayObserver = new IntersectionObserver((entries)=>{
+            entries.forEach(entry=>{
+                if(entry.isIntersecting){
+                    bdayCanvas.classList.add('active');
+                    if(!bdayFireworkInterval){
+                        bdayFireworkInterval = setInterval(()=>bdayLaunchFirework(Math.random()*bdayCanvas.width, Math.random()*bdayCanvas.height*0.6), 1400);
+                    }
+                    if(!bdayConfettiInterval){
+                        bdaySpawnConfettiBatch(100);
+                        bdayConfettiInterval = setInterval(()=>bdaySpawnConfettiBatch(50), 4500);
+                    }
+                } else {
+                    bdayCanvas.classList.remove('active');
+                    clearInterval(bdayFireworkInterval); bdayFireworkInterval = null;
+                    clearInterval(bdayConfettiInterval); bdayConfettiInterval = null;
+                }
+            });
+        }, { threshold: 0.3 });
+        if(bdaySection) bdayObserver.observe(bdaySection);
     </script>
 </body>
 </html>
