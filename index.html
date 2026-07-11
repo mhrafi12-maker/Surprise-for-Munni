@@ -353,6 +353,23 @@
         .candle.blown { filter: grayscale(1) brightness(0.55); transform: scale(0.85); cursor: default; }
         .candle-hint { font-size: 12px; color: var(--text-muted); letter-spacing: 0.3px; }
 
+        .bday-card { position: relative; }
+        .sparkle {
+            position: absolute; font-size: 16px; pointer-events: none;
+            animation: sparkleTwinkle 2.4s ease-in-out infinite;
+            filter: drop-shadow(0 0 6px var(--primary-blue));
+        }
+        @keyframes sparkleTwinkle {
+            0%, 100% { opacity: 0.2; transform: scale(0.8) rotate(0deg); }
+            50% { opacity: 1; transform: scale(1.15) rotate(15deg); }
+        }
+
+        .bday-wish-ticker {
+            font-family: 'Dancing Script', cursive; font-size: 19px; color: var(--love-pink);
+            min-height: 34px; margin: 4px 0 18px; text-shadow: 0 0 10px var(--pink-glow);
+            transition: opacity 0.5s ease;
+        }
+
         .bday-glow-btn { animation: bdayPulse 1.8s ease-in-out infinite; }
         @keyframes bdayPulse {
             0%, 100% { box-shadow: 0 8px 32px rgba(0,0,0,0.3), 0 0 0px var(--blue-glow); }
@@ -515,12 +532,24 @@
 
     <section class="section" id="sec-5">
         <canvas id="birthday-fx-canvas"></canvas>
-        <div class="glass-card" style="max-width: 400px;">
-            <div class="badge">🎂 Happy Birthday Munnu 🎂</div>
+        <div class="glass-card bday-card" style="max-width: 400px;">
+            <span class="sparkle" style="top:8%; left:10%;">✨</span>
+            <span class="sparkle" style="top:15%; right:8%; animation-delay:0.6s;">✨</span>
+            <span class="sparkle" style="bottom:12%; left:6%; animation-delay:1.1s;">✨</span>
+            <span class="sparkle" style="bottom:20%; right:10%; animation-delay:1.6s;">✨</span>
+
+            <div class="badge">🎂 ১২ জুলাই — তোমার জন্মদিন ❤️</div>
+
+            <div class="profile-avatar-wrapper" style="width:100px; height:100px; margin-bottom:10px;">
+                <img src="https://dl.dropbox.com/scl/fi/6fhstrs98al1jnkyvqg53/IMG_20260213_221832.jpg?rlkey=zfd54i959tqou8ruzc4jir1zv&st=qbp024wr&dl=1"
+                     class="profile-avatar" style="width:88px; height:88px;" alt="Rafi and Munnu">
+            </div>
 
             <h1 class="bday-glow" style="font-size: 28px; line-height: 1.4;">শুভ জন্মদিন আমার বউ মুন্নু 💍</h1>
 
             <p class="bday-msg">তোমার জামাই তোমাকে সবসময় অনেক অনেক ভালোবাসে। তুমি আমার জীবনের সবচেয়ে সুন্দর উপহার, আমার প্রতিটা দিনের শান্তি, আমার সবচেয়ে বড় ভালোবাসা। তোমার এই বিশেষ দিনে চাই তোমার মুখে ঠিক এমনই একটা হাসি লেগে থাকুক সারাদিন। জন্মদিনের অনেক অনেক শুভেচ্ছা, আমার মুন্নু। ভালোবাসি তোমায়, আজ, কাল, সবসময়, চিরকাল। 🎂❤️</p>
+
+            <div class="bday-wish-ticker" id="bdayWishTicker">তুমি আমার সবচেয়ে সুন্দর গল্পের নায়িকা 💫</div>
 
             <div class="bday-cake-wrap">
                 <div class="cake-visual">🎂</div>
@@ -724,6 +753,27 @@
         document.querySelectorAll('.timeline-item').forEach(el=>obs.observe(el));
 
         /* ================= জন্মদিন সেকশন ================= */
+
+        /* ঘোরানো রোমান্টিক উইশ */
+        const bdayWishes = [
+            "তুমি আমার সবচেয়ে সুন্দর গল্পের নায়িকা 💫",
+            "তোমার হাসিই আমার সবচেয়ে প্রিয় সুর 🎶",
+            "তুমি আমার প্রতিটা স্বপ্নের একমাত্র মানুষ 🌙",
+            "তোমাকে ভালোবাসি, প্রতিটা জন্মেই ভালোবাসব 💙",
+            "তুমি আছো বলেই আমার পৃথিবীটা এত সুন্দর ❤️"
+        ];
+        let wishIdx = 0;
+        function rotateBdayWish(){
+            const el = document.getElementById('bdayWishTicker');
+            if(!el) return;
+            el.style.opacity = 0;
+            setTimeout(()=>{
+                wishIdx = (wishIdx + 1) % bdayWishes.length;
+                el.innerText = bdayWishes[wishIdx];
+                el.style.opacity = 1;
+            }, 500);
+        }
+        setInterval(rotateBdayWish, 3800);
 
         /* মোমবাতি ফুঁ দেওয়ার ইন্টারঅ্যাকশন */
         let candlesBlown = 0;
