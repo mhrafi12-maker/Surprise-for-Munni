@@ -342,6 +342,17 @@
         .bday-count-label { font-size: 11px; color: var(--text-muted); margin-bottom: 22px; letter-spacing: 0.5px; }
         .bday-btn-row { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 8px; }
 
+        .bday-cake-wrap { margin: 8px 0 20px; }
+        .cake-visual { font-size: 58px; filter: drop-shadow(0 0 12px var(--pink-glow)); }
+        .candle-row { display: flex; justify-content: center; gap: 16px; margin: -14px 0 10px; }
+        .candle {
+            cursor: pointer; font-size: 26px; user-select: none;
+            transition: transform 0.2s, filter 0.4s; display: inline-block;
+        }
+        .candle:hover { transform: scale(1.15); }
+        .candle.blown { filter: grayscale(1) brightness(0.55); transform: scale(0.85); cursor: default; }
+        .candle-hint { font-size: 12px; color: var(--text-muted); letter-spacing: 0.3px; }
+
         .bday-glow-btn { animation: bdayPulse 1.8s ease-in-out infinite; }
         @keyframes bdayPulse {
             0%, 100% { box-shadow: 0 8px 32px rgba(0,0,0,0.3), 0 0 0px var(--blue-glow); }
@@ -511,8 +522,15 @@
 
             <p class="bday-msg">তোমার জামাই তোমাকে সবসময় অনেক অনেক ভালোবাসে। তুমি আমার জীবনের সবচেয়ে সুন্দর উপহার, আমার প্রতিটা দিনের শান্তি, আমার সবচেয়ে বড় ভালোবাসা। তোমার এই বিশেষ দিনে চাই তোমার মুখে ঠিক এমনই একটা হাসি লেগে থাকুক সারাদিন। জন্মদিনের অনেক অনেক শুভেচ্ছা, আমার মুন্নু। ভালোবাসি তোমায়, আজ, কাল, সবসময়, চিরকাল। 🎂❤️</p>
 
-            <div id="bday-countdown" class="bday-countdown">--:--:--</div>
-            <div class="bday-count-label" id="bday-countdown-label">তোমার স্পেশাল দিন শুরু হতে বাকি</div>
+            <div class="bday-cake-wrap">
+                <div class="cake-visual">🎂</div>
+                <div class="candle-row">
+                    <span class="candle" onclick="blowCandle(this)">🕯️</span>
+                    <span class="candle" onclick="blowCandle(this)">🕯️</span>
+                    <span class="candle" onclick="blowCandle(this)">🕯️</span>
+                </div>
+                <p class="candle-hint" id="candleHint">মোমবাতিগুলোতে ফুঁ দাও, তোমার ইচ্ছা পূরণ হবে ✨</p>
+            </div>
 
             <div class="bday-btn-row">
                 <button class="btn-magic bday-glow-btn" onclick="bdaySurprise(event)">🎉 সারপ্রাইজ! 🎉</button>
@@ -707,28 +725,21 @@
 
         /* ================= জন্মদিন সেকশন ================= */
 
-        /* কাউন্টডাউন (রাত ১২টা পর্যন্ত) */
-        function updateBdayCountdown(){
-            const now = new Date();
-            const next = new Date(now);
-            next.setHours(24,0,0,0);
-            const diff = next - now;
-            const cd = document.getElementById('bday-countdown');
-            const lbl = document.getElementById('bday-countdown-label');
-            if(!cd) return;
-            if(diff <= 1000){
-                cd.innerText = "🎉 এখনই! 🎉";
-                lbl.innerText = "শুভ জন্মদিন মুন্নু!";
-                clearInterval(bdayTimer);
-                return;
+        /* মোমবাতি ফুঁ দেওয়ার ইন্টারঅ্যাকশন */
+        let candlesBlown = 0;
+        function blowCandle(el){
+            if(el.classList.contains('blown')) return;
+            el.classList.add('blown');
+            candlesBlown++;
+            const totalCandles = document.querySelectorAll('.candle').length;
+            const hint = document.getElementById('candleHint');
+            if(candlesBlown === totalCandles){
+                hint.innerText = "🎉 তোমার ইচ্ছা পূরণ হোক, আমার মুন্নু! 🎉";
+                bdaySurprise();
+            } else {
+                hint.innerText = "আরও ফুঁ দাও পাখি... ✨";
             }
-            const h = Math.floor(diff/3600000);
-            const m = Math.floor((diff%3600000)/60000);
-            const s = Math.floor((diff%60000)/1000);
-            cd.innerText = String(h).padStart(2,'0')+":"+String(m).padStart(2,'0')+":"+String(s).padStart(2,'0');
         }
-        const bdayTimer = setInterval(updateBdayCountdown, 1000);
-        updateBdayCountdown();
 
         /* ফায়ারওয়ার্ক + কনফেটি ক্যানভাস */
         const bdayCanvas = document.getElementById('birthday-fx-canvas');
